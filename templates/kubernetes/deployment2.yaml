@@ -1,5 +1,5 @@
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: rocketmq-ns-deployment
 spec:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: rocketmq-nameserver
-        image: apacherocketmq/rocketmq:ROCKETMQ_VERSION
+        image: huyuwei1996/rocketmq:ROCKETMQ_VERSION
         command: ["sh","mqnamesrv"]
         imagePullPolicy: IfNotPresent
         ports:
@@ -31,7 +31,7 @@ spec:
         emptyDir: {}
 ---          
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: rocketmq-broker-deployment
 spec:
@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
       - name: rocketmq-broker
-        image: apacherocketmq/rocketmq:ROCKETMQ_VERSION
+        image: huyuwei1996/rocketmq:ROCKETMQ_VERSION
         command: ["sh","mqbroker", "-n","rocketmq-ns-deployment:9876"]
         imagePullPolicy: IfNotPresent
         ports:
